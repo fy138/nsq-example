@@ -36,8 +36,8 @@ func (h *myMessageHandler) HandleMessage(m *nsq.Message) error {
 		}
 
 	}
+	h.WaitGroupOne.Add(1)
 	go func() {
-		h.WaitGroupOne.Add(1)
 		h.processMessage(m.Body)
 		h.WaitGroupOne.Done()
 		<-h.PoolOne
